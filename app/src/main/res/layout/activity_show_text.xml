@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,9 +8,9 @@
     tools:context=".ShowText">
 
     <LinearLayout
-        android:layout_above="@id/bannerAdsLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@id/bannerAdsLayout">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -30,19 +31,18 @@
     <LinearLayout
         android:id="@+id/bannerAdsLayout"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/black_text"
         android:visibility="gone">
 
         <!--    Ads View    -->
-        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            ads:adSize="@string/ads_Type"
-            ads:adUnitId="@string/textShow_page_banner_ads_id" />
+            app:adSize="@string/ads_Type"
+            app:adUnitId="@string/textShow_page_banner_ads_id" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.Task;
@@ -154,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             exitAlertApplication();
             //super.onBackPressed();
         }
-
     }
 
     public void bannerAdsLoadAfterSomeTime(final long milliseconds) {
@@ -174,7 +174,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     // TODO: GOOGLE ADS LOADER
                     if (mAdView != null) {
                         adsController.loadBannerAds(mAdView);
-                        bannerAdsLayout.setVisibility(View.VISIBLE);
+                        mAdView.setAdListener(new AdListener() {
+                            @Override
+                            public void onAdLoaded() {
+                                super.onAdLoaded();
+                                bannerAdsLayout.setVisibility(View.VISIBLE);
+                            }
+                        });
                     } else {
                         bannerAdsLayout.setVisibility(View.GONE);
                     }

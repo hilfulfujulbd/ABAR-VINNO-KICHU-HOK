@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
@@ -92,7 +93,13 @@ public class ShowText extends AppCompatActivity {
 
             if (mAdView != null) {
                 adsController.loadBannerAds(mAdView);
-                bannerAdsLayout.setVisibility(View.VISIBLE);
+                mAdView.setAdListener(new AdListener() {
+                    @Override
+                    public void onAdLoaded() {
+                        super.onAdLoaded();
+                        bannerAdsLayout.setVisibility(View.VISIBLE);
+                    }
+                });
             } else {
                 bannerAdsLayout.setVisibility(View.GONE);
             }
