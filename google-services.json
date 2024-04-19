@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "401617848489",
+    "project_id": "aber-vinno-kichu---arif-azad",
+    "storage_bucket": "aber-vinno-kichu---arif-azad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401617848489:android:13aba214929e1be6d481b8",
+        "android_client_info": {
+          "package_name": "com.toufikhasan.abarvinnokichuhok"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401617848489-scdvn6s5jm94265ptats3k4sctao5aro.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGUoBH3kJ6v_H20i8VWoo4uva0wnvHbRE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401617848489-scdvn6s5jm94265ptats3k4sctao5aro.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-5980068077636654~4777679189"
+    }
+  ],
+  "configuration_version": "1"
+}
