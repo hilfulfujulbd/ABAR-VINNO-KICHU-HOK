@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">Abar Vinno Kichu Hok</string>
+
+
+<!--    TODO: Google TEST application information ;-->
+    <string name="application_ads_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="home_page_banner_ads_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="textShow_page_banner_ads_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ads_Type">BANNER</string>
+    <string name="textShow_page_image_ads_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <!--/*
+    TODO: Google Admob application information data ;
+
+    <string name="application_ads_id" translatable="false">ca-app-pub-5980068077636654~4777679189</string>
+    <string name="home_page_banner_ads_id" translatable="false">ca-app-pub-5980068077636654/5431768348</string>
+    <string name="textShow_page_banner_ads_id" translatable="false">ca-app-pub-5980068077636654/2809474435</string>
+    <string name="ads_Type">BANNER</string>
+    <string name="textShow_page_image_ads_id" translatable="false">ca-app-pub-5980068077636654/1053539632</string>
+    */-->
+
+    <!--  TODO: Google Admob Information end  -->
+
+    <string name="suchiprotro">সুচিপত্র</string>
+    <string name="apnare_ami_khujiya_berai">আপনারে আমি খুঁজিয়া বেড়াই</string>
+    <string name="je_sutai_badha_jibon">যে সুতোয় বাঁধা জীবন</string>
+    <string name="gahi_notuner_gan">গাহি নতুনের গান</string>
+    <string name="potoner_ayaj_paoya_jay">পতনের আওয়াজ পাওয়া যায়</string>
+    <string name="bisshojora_patsala_more">বিশ্বজোড়া পাঠশালা মোর</string>
+    <string name="kokhono_vul_hole">কখনো ভুল হলে</string>
+    <string name="bondishibir_theke">বন্দিশিবির থেকে</string>
+    <string name="jodi_tor_dak_sune_keo_na_ase">যদি তোর ডাক শুনে কেউ না আসে</string>
+    <string name="je_jai_boluk_piche">যে যাই বলুক পিছে</string>
+    <string name="khule_jak_jiboner_bondho_duyar">খুলে যাক জীবনের বদ্ধ দুয়ার</string>
+    <string name="khelaghor_pata_ase_ai_akhane">খেলাঘর পাতা আছে এই এখানে</string>
+    <string name="ridoyer_janala_khule_dao_na">হৃদয়ের জানালাটা খুলে দাও না</string>
+    <string name="jiboner_kompass">জীবনের কম্পাস</string>
+    <string name="valobasi_valobasi">ভালোবাসা ভালোবাসি</string>
+    <string name="sumudher_sad">সমুদ্রের সাধ</string>
+    <string name="abar_vinno_kichu_hok">এবার ভিন্ন কিছু হোক</string>
+
+    <string name="nav_open">Navigation Open</string>
+    <string name="nav_close">Navigation Close</string>
+
+    <string name="home">Home</string>
+    <string name="book_writer">Book Writer</string>
+    <string name="about_apps">About Book</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="other_application">Other Application</string>
+    <string name="message_book">Message Book</string>
+    <string name="ahobban_book">Ahobban Mizanur Rahman</string>
+    <string name="more_apps">More Apps</string>
+    <string name="communication">Communication</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="website">My Website</string>
+    <string name="company_website">Company Website</string>
+    <string name="shair">Shair</string>
+    <string name="social_account">Social Account</string>
+    <string name="facebook_toufik">Facebook</string>
+    <string name="facebook_tauhid">Facebook</string>
+    <string name="youtube_toufik">Dev Youtube</string>
+    <string name="youtube_tauhid">Youtube</string>
+    <string name="twitter">Twitter</string>
+    <string name="author_name">আরিফ আজাদ</string>
+    <string name="update_app">Update Application</string>
+    <string name="rate_app">Rate Application</string>
+    <string name="share">Share</string>
+    <string name="facebook_page">Dev Facebook Page</string>
+    <string name="facebook_group">Facebook Group</string>
+    <string name="linkedin">LinkedIn</string>
+    <string name="congrs">অভিনন্দন!</string>
+    <string name="join_our_group">গ্রুপে জয়েন করার পরামর্শ?</string>
+    <string name="group_join_about_text">এই অ্যাপ্সের যেকোন সমস্যায় আমারদের গ্রপে জয়েন করুন, এবং একটি স্কিন শর্ট পোষ্ট করুন। তাছাড়াও আপনি গ্রপে বই থেকে আপনার ভালো লাগা অংশ আমাদের সাথে শিয়ার করতে পারবেন। আর আপনি যদি আগে জয়েন করে থাকেন তাহলে “আমি জয়েন করেছি!” বাটুনে ক্লিক করুন।\nসহযোগিতার জন্য ধন্যবাদ।</string>
+    <string name="already_join_group">আমি জয়েন করেছি!</string>
+    <string name="JoinNow">জয়েন করুন</string>
+    <string name="from_text">FROM</string>
+    <string name="hilful_fujul_bd">HILFUL FUJUL BD</string>
+</resources>
