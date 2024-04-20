@@ -1,7 +1,5 @@
 package com.toufikhasan.abarvinnokichuhok;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,8 +7,10 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.toufikhasan.abarvinnokichuhok.main.MainApp;
 
 public class WellComeScreen extends AppCompatActivity {
     LinearLayout developerInfo;
@@ -21,7 +21,7 @@ public class WellComeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_well_come_screen);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
         developerInfo = findViewById(R.id.developer_info);
@@ -34,9 +34,10 @@ public class WellComeScreen extends AppCompatActivity {
         Thread thread = new Thread(this::ProssingApplication);
         thread.start();
     }
-    public void ProssingApplication(){
+
+    public void ProssingApplication() {
         int progress;
-        for (progress = 0; progress <= 100; progress = progress + 1){
+        for (progress = 0; progress <= 100; progress = progress + 1) {
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
@@ -45,8 +46,9 @@ public class WellComeScreen extends AppCompatActivity {
         }
         openApplication();
     }
-    public void openApplication(){
-        startActivity(new Intent(WellComeScreen.this,MainActivity.class));
+
+    public void openApplication() {
+        startActivity(new Intent(WellComeScreen.this, MainActivity.class));
         finish();
     }
 }

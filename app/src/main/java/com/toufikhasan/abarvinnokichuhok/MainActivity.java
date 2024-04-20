@@ -1,19 +1,10 @@
 package com.toufikhasan.abarvinnokichuhok;
 
-import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,9 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
@@ -42,40 +30,18 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int UPDATE_IN_APP_CODE = 8045;
-    private static final long LENGTH_MILLISECONDS = 5000;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
-    InternetCheck internetCheck;
-    AdView mAdView;
-    LinearLayout bannerAdsLayout;
     ReviewManager manager;
     ReviewInfo reviewInfo;
-    AdsShowController adsController;
-    private CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MobileAds.initialize(this, initializationStatus -> {
-        });
-
-        // Banner Ads
-        bannerAdsLayout = findViewById(R.id.bannerAdsLayout);
-        mAdView = findViewById(R.id.adView);
-
-        internetCheck = new InternetCheck(getApplicationContext());
-        adsController = new AdsShowController(this);
-
-        if (countDownTimer == null) {
-            bannerAdsLoadAfterSomeTime(LENGTH_MILLISECONDS);
-            countDownTimer.start();
-        }
-
         // Title Change
         Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.abar_vinno_kichu_hok);
-
 
         // Drawable Show & hide java program
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -108,44 +74,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         findViewById(R.id.SN15).setOnClickListener(view -> startActivityApplication(getString(R.string.sumudher_sad), "text/chapter/sumudher_sad.txt"));
         findViewById(R.id.SN16).setOnClickListener(view -> startActivityApplication(getString(R.string.abar_vinno_kichu_hok), "text/chapter/abar_vinno_kichu_hok.txt"));
 
-
-        if (!preferencesForVisibleDialog()) {
-            JOIN_OUR_GROUP_DIALOG_BOX_ABER_VINNO_KISU_APP();
-        }
     }
 
     /**
      * Called when leaving the activity
      */
-    @Override
-    public void onPause() {
-        if (mAdView != null) {
-            mAdView.pause();
-        }
-        super.onPause();
-    }
-
-    /**
-     * Called when returning to the activity
-     */
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (mAdView != null) {
-            mAdView.resume();
-        }
-    }
-
-    /**
-     * Called before the activity is destroyed
-     */
-    @Override
-    public void onDestroy() {
-        if (mAdView != null) {
-            mAdView.destroy();
-        }
-        super.onDestroy();
-    }
 
     @Override
     public void onBackPressed() {
@@ -155,39 +88,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             exitAlertApplication();
             //super.onBackPressed();
         }
-    }
-
-    public void bannerAdsLoadAfterSomeTime(final long milliseconds) {
-        if (countDownTimer != null) {
-            countDownTimer.cancel();
-        }
-
-        countDownTimer = new CountDownTimer(milliseconds, 50) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-
-            }
-
-            @Override
-            public void onFinish() {
-                if (internetCheck.isConnected()) {
-                    // TODO: GOOGLE ADS LOADER
-                    if (mAdView != null) {
-                        adsController.loadBannerAds(mAdView);
-                        mAdView.setAdListener(new AdListener() {
-                            @Override
-                            public void onAdLoaded() {
-                                super.onAdLoaded();
-                                bannerAdsLayout.setVisibility(View.VISIBLE);
-                            }
-                        });
-                    } else {
-                        bannerAdsLayout.setVisibility(View.GONE);
-                    }
-
-                }
-            }
-        };
     }
 
     public void exitAlertApplication() {
@@ -207,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         AlertDialog alertDialog = exitAlert.create();
         alertDialog.show();
-
     }
 
     @Override
@@ -248,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Abar Vinno Kichu Hok App contact");
-            String shareMassage = "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID;
+            String shareMassage = "https://play.google.com/store/apps/details?id=com.toufikhasan.abarvinnokichuhok";
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMassage);
 
             startActivity(Intent.createChooser(shareIntent, "ShareVia"));
@@ -321,39 +220,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Something ERROR...", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    public void JOIN_OUR_GROUP_DIALOG_BOX_ABER_VINNO_KISU_APP() {
-        Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.custom_dialog_box_for_join_groph);
-        dialog.setCancelable(false);
-
-        Button GROUP_JOIN = dialog.findViewById(R.id.group_join_now);
-        GROUP_JOIN.setOnClickListener(v -> {
-            gotoUrl("https://www.facebook.com/groups/books.my.friend");
-            dialog.dismiss();
-        });
-        TextView alreadyJOIN = dialog.findViewById(R.id.group_already_join);
-        alreadyJOIN.setOnClickListener(v -> {
-            preferencesSaveData();
-            dialog.dismiss();
-        });
-        ImageView close = dialog.findViewById(R.id.close_btn_dialog);
-        close.setOnClickListener(v -> dialog.dismiss());
-        dialog.show();
-    }
-
-    private boolean preferencesForVisibleDialog() {
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("saveDialogBoxData", MODE_PRIVATE);
-        return sharedPreferences.getBoolean("fb_group_join", false);
-    }
-
-    @SuppressLint("ApplySharedPref")
-    public void preferencesSaveData() {
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("saveDialogBoxData", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("fb_group_join", true);
-        editor.commit();
     }
 
     @Override

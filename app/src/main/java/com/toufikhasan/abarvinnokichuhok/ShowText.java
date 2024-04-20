@@ -1,11 +1,8 @@
 package com.toufikhasan.abarvinnokichuhok;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -15,8 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.toufikhasan.abarvinnokichuhok.admob.InterstitialAds;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,30 +24,24 @@ import java.util.Objects;
 public class ShowText extends AppCompatActivity {
     public static final String FILE_NAME = "FILE_NAME";
     public static final String TITLE_NAME = "TITLE_NAME";
-    AdsShowController adsController;
-    LinearLayout bannerAdsLayout;
     InternetCheck internetCheck;
+    private LinearLayout bannerAdsLayout;
     private String filename;
     private AdView mAdView;
-    private CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_text);
-        //        Google Ads Start
-        // Banner Ads
-        MobileAds.initialize(this, initializationStatus -> {
-        });
 
-        bannerAdsLayout = findViewById(R.id.bannerAdsLayout);
+        //        Google Ads Start
+        bannerAdsLayout = findViewById(R.id.ads_layout);
         mAdView = findViewById(R.id.adView);
 
-        adsController = new AdsShowController(this);
-
         internetCheck = new InternetCheck(getApplicationContext());
+
         if (internetCheck.isConnected()) {
-            showAdsSomeTime();
+            showAdsConfig();
         }
 
         Intent intent = getIntent();
@@ -84,83 +77,48 @@ public class ShowText extends AppCompatActivity {
         showText.setText(text);
     }
 
-    private void showAdsSomeTime() {
-
-        final int ADS_SHOW_AFTER = 10000;
-        if (isAdsShow()) {
-            saveAdsData();
-            adsController.loadInterstitialAds();
-
-            if (mAdView != null) {
-                adsController.loadBannerAds(mAdView);
-                mAdView.setAdListener(new AdListener() {
-                    @Override
-                    public void onAdLoaded() {
-                        super.onAdLoaded();
-                        bannerAdsLayout.setVisibility(View.VISIBLE);
-                    }
-                });
-            } else {
-                bannerAdsLayout.setVisibility(View.GONE);
-            }
-
-        }
-        bannerAdsLoadAfterSomeTime(ADS_SHOW_AFTER);
-        countDownTimer.start();
-    }
-
-    public void bannerAdsLoadAfterSomeTime(final long milliseconds) {
-        if (countDownTimer != null) {
-            countDownTimer.cancel();
-        }
-
-        countDownTimer = new CountDownTimer(milliseconds, 50) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-
-            }
-
-            @Override
-            public void onFinish() {
-                updateAdsData();
-            }
-        };
-    }
-
-    private boolean isAdsShow() {
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("INTERSTITIAL", MODE_PRIVATE);
-        return sharedPreferences.getBoolean("ADS_SHOW", true);
-    }
-
-    @SuppressLint("ApplySharedPref")
-    private void saveAdsData() {
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("INTERSTITIAL", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("ADS_SHOW", false);
-        editor.commit();
-    }
-
-    @SuppressLint("ApplySharedPref")
-    private void updateAdsData() {
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("INTERSTITIAL", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("ADS_SHOW", true);
-        editor.commit();
-
-        if (bannerAdsLayout.getVisibility() == View.GONE) {
-            showAdsSomeTime();
-        }
-    }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
         }
-
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Called when leaving the activity
+     */
+
+    @Override
+    public void onBackPressed() {
+        if (InterstitialAds.mInterstitialAd != null) {
+            InterstitialAds.mInterstitialAd.show(this);
+            InterstitialAds.mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                @Override
+                public void onAdDismissedFullScreenContent() {
+                    super.onAdDismissedFullScreenContent();
+                    InterstitialAds.mInterstitialAd = null;
+                    CountTimer.startTimer(() -> InterstitialAds.loadInterstitialAd(getApplicationContext()));
+                }
+            });
+        }
+        super.onBackPressed();
+    }
+
+    private void showAdsConfig() {
+        if (mAdView != null) {
+            mAdView.loadAd(new AdRequest.Builder().build());
+            mAdView.setAdListener(new AdListener() {
+                @Override
+                public void onAdLoaded() {
+                    super.onAdLoaded();
+                    bannerAdsLayout.setVisibility(View.VISIBLE);
+                }
+            });
+        } else {
+            bannerAdsLayout.setVisibility(View.GONE);
+        }
+    }
 
     /**
      * Called when leaving the activity
@@ -193,11 +151,5 @@ public class ShowText extends AppCompatActivity {
             mAdView.destroy();
         }
         super.onDestroy();
-    }
-
-    @Override
-    public void onBackPressed() {
-        adsController.showInterstitialAds();
-        super.onBackPressed();
     }
 }

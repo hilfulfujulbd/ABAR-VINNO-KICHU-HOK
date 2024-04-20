@@ -1,24 +1,13 @@
 <resources>
     <string name="app_name">Abar Vinno Kichu Hok</string>
 
-
-<!--    TODO: Google TEST application information ;-->
-    <string name="application_ads_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
-    <string name="home_page_banner_ads_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="textShow_page_banner_ads_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="ads_Type">BANNER</string>
-    <string name="textShow_page_image_ads_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
-
-    <!--/*
-    TODO: Google Admob application information data ;
-
+    <!--/* TODO: Google Admob application information data ; */-->
     <string name="application_ads_id" translatable="false">ca-app-pub-5980068077636654~4777679189</string>
     <string name="home_page_banner_ads_id" translatable="false">ca-app-pub-5980068077636654/5029232642</string>
     <string name="textShow_page_banner_ads_id" translatable="false">ca-app-pub-5980068077636654/8091360311</string>
     <string name="ads_Type">BANNER</string>
     <string name="textShow_page_image_ads_id" translatable="false">ca-app-pub-5980068077636654/6097301883</string>
 
-    */-->
 
     <!--  TODO: Google Admob Information end  -->
 
